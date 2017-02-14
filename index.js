@@ -3,6 +3,7 @@ var express = require('express');
 var http    = require('http');
 var _       = require('lodash');
 var dbCred  = require('./dbCredentials');
+var props   = require('./properties');
 var app     = express();
 
 var pool    = mysql.createPool(dbCred);
@@ -21,6 +22,13 @@ function dbCall(query, callbackFn) {
                       connection.release();
                       callbackFn(rows);
                     });
+
+    connection.commit(function(err) {
+      return connection.rollback(function() {
+        throw err;
+      });
+
+    });
   });
 }
 
@@ -45,7 +53,7 @@ function handleDatabase(req, res) {
 };
 
 function refreshFromWeb(req, resp) {
-  http.get('http://api.emiratesauction.com/v2/carsonline', res => {
+  http.get(props.url, res => {
     if (res.statusCode !== 200) {
       console.log('Error hapened', res);
       res.resume();
@@ -60,7 +68,11 @@ function refreshFromWeb(req, resp) {
     res.on('end', () => {
       try {
         let parsedData = JSON.parse(rawData);
-        updateCars(parsedData.Cars || []);
+        let filtered = _.filter(parsedData.Cars, function(car) {
+          return !(car.makeID == 318 || //equipments
+                 car.makeID == 488); //scrap
+        });
+        updateCars(filtered || []);
       } catch (e) {
         console.log('error', e.message);
       }
@@ -84,7 +96,8 @@ function updateCars(cars) {
       price  : car.AuctionInfo.currentPrice * 80
     };
 
-    saveCar(currentCar, new Date());
+    console.log(currentCar);
+    //saveCar(currentCar, new Date());
   });
 }
 
@@ -93,13 +106,15 @@ function saveCar(car, date) {
       'select ?, ?, ?, ?, ?, ?, ?, ?, ? from dual ' + 
       'where not exists (select * from Cars where id = ?);'
 
-  dbCall(carsSql)
+  console.log('save in progress', car);
+  dbCall(carsSql, function(rows) {console.log(rows)});
+  console.log('car saved');
 }
-
+/*
 app.get('/', handleDatabase);
 
 app.get('/refresh/web', refreshFromWeb);
-
+*/
+refreshFromWeb({}, {send:function(){}});
 app.listen(3000);
 console.log('App started and listening on localhost:3000');
-console.log(dbCred);
