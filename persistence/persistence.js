@@ -3,16 +3,16 @@ var exports = module.exports = {};
 exports = function(provider) {
 	return {
 		saveCar : function(car) {
-			provider.saveCar(car);
+			return provider.saveCar(car);
 		},
 		saveCars : function(cars) {
-			provider.saveCars(cars);
+			return provider.saveCars(cars);
 		},
 		getCar : function(id) {
-			provider.openCar(id);
+			return provider.openCar(id);
 		},
 		getAllCars : function(opt_filter) {
-			provider.getAllCars(opt_filter);
+			return provider.getAllCars(opt_filter);
 		}
 	}
 };

@@ -1,13 +1,27 @@
 var exports = module.exports = {};
 var http    = require('http');
+var q       = require('q');
 var props   = require('../resources/properties');
 
+var urlPattern = /^(.*)(:(\w+))(.*)$/;
 
-exports.getAllCars = function(callback) {
-  http.get(props.url, res => {
+exports.getAllCars = function() {
+    return sendGet(props.url);
+}
+
+exports.getCar = function(id) {
+  return sendGet(props.getCarUrl, {
+  	id = id
+  })
+}
+
+function sendGet(url, properties) {
+  let deferred = Q.defer();
+
+  http.get(resolveUrl(url, properties), res => {
     if (res.statusCode !== 200) {
-      console.log('Error hapened', res);
       res.resume();
+      deferred.reject(new Error(res));
       return;
     }
 
@@ -18,10 +32,22 @@ exports.getAllCars = function(callback) {
     });
     res.on('end', () => {
       try {
-        callback(JSON.parse(rawData));
+      	deferred.resolve(JSON.parse(rawData))
       } catch (e) {
-        console.log('error', e.message);
+        deferred.reject(e);
       }
     });
   });
+
+  return deferred.promise;
+}
+
+function resolveUrl(url, properties) {
+  if (! properties) {
+  	return url
+  }
+
+  let processed = urlPattern.exec(url);
+
+  return processed[1] + properties[processed[3]] + properties[4];
 }
