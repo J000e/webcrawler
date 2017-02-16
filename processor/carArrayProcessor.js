@@ -28,7 +28,7 @@ function updateCars(cars) {
   });
 }
 
-exports.process(carArray) {
+exports.process = (carArray) => {
 	let filtered = _.filter(carArray, justCars);
 	//todo: call something like updateCars, but with _.map
 	return filtered;

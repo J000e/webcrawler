@@ -66,11 +66,11 @@ exports.saveCars = function(cars) {
     });
 };
 
-exports.getCar : function(id) {
+exports.getCar = function(id) {
     return getAllCars({carID : id});
 };
 
-exports.getAllCars : function(opt_filter) {
+exports.getAllCars = function(opt_filter) {
     if (! opt_filter) {
         return cars;
     }
@@ -78,9 +78,9 @@ exports.getAllCars : function(opt_filter) {
     return _.filter(cars, function(car) {
         var keep = true;
 
-        _.keys(opt_filter, function(key)) {
+        _.keys(opt_filter, function(key) {
             keep &= car[key] == opt_filter[key];
-        }
+        });
 
         return keep;
     });

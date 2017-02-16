@@ -1,6 +1,4 @@
-var exports = module.exports = {};
-
-exports = function(provider) {
+module.exports = function(provider) {
 	return {
 		saveCar : function(car) {
 			return provider.saveCar(car);

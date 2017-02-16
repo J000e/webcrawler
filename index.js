@@ -1,13 +1,13 @@
 var express      = require('express');
-var http         = require('./data-provider/httpProvider');
-var file         = require('./data-provider/fileProvider');
-var dataProvider = require('./data-provider/dataProvider')(file);
+var http         = require('./data-providers/httpProvider.js');
+var file         = require('./data-providers/fileProvider.js');
+var dataProvider = require('./data-providers/dataProvider.js')(file);
 //var dataProvider = require('./data-provider/dataProvider')(http);
-var carProcessor = require('./processor/carArrayProcessor');
-var mysql        = require('./persistence/mysqlPersistence');
-var debug        = require('./persistence/debugPersistence');
-var persistence  = require('./persistence/persistence')(debug);
-//var persistence  = require('./persistence/persistence')(mysql);
+var carProcessor = require('./processor/carArrayProcessor.js');
+var mysql        = require('./persistence/mysqlPersistence.js');
+var debug        = require('./persistence/debugPersistence.js');
+//var persistence  = require('./persistence/persistence.js')(debug);
+var persistence  = require('./persistence/persistence')(mysql);
 
 var app = express();
 
@@ -35,7 +35,7 @@ function processCars(carArray) {
 
 function getPersistedActiveCars(processedCars) {
   var filter = {
-    active : true;
+    active : true
   }
 
   persistence.getAllCars(filter).then(function(persistedCars) {
@@ -88,10 +88,10 @@ app.get('/', handleDatabase);
 
 app.get('/refresh/web', refreshFromWeb);
 */
-//refreshFromWeb({}, {send:function(){}});
+refreshFromWeb({}, {send:function(){}});
 
 
+//console.log(dataProvider.getAllCars());
 
-
-app.listen(3000);
+//app.listen(3000);
 console.log('App started and listening on localhost:3000');

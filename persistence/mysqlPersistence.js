@@ -1,7 +1,7 @@
 var exports = module.exports = {};
-var pool    = mysql.createPool(dbCred);
 var mysql   = require('mysql');
-var dbCred  = require('./dbCredentials');
+var dbCred  = require('../resources/dbCredentials');
+var pool    = mysql.createPool(dbCred);
 
 
 function dbCall(query, callbackFn) {

@@ -6,13 +6,13 @@ var props   = require('../resources/properties');
 var urlPattern = /^(.*)(:(\w+))(.*)$/;
 
 exports.getAllCars = function() {
-    return sendGet(props.url);
+    return sendGet(props.getAllCarUrl);
 }
 
 exports.getCar = function(id) {
-  return sendGet(props.getCarUrl, {
-  	id = id
-  })
+  return sendGet(props.getCarByIdUrl, {
+  	id : id
+  });
 }
 
 function sendGet(url, properties) {
