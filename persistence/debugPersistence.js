@@ -1,4 +1,6 @@
 var exports = module.exports = {};
+var _ = require('lodash');
+var Q = require('q');
 
 var carList = [{
     "carID": 48693,
@@ -57,12 +59,12 @@ var carList = [{
 }];
 
 exports.saveCar = function(car) {
-    cars.push(car);
+    carList.push(car);
 };
 
 exports.saveCars = function(cars) {
     _.each(cars, function(car) {
-        cars.push(car);
+        carList.push(car);
     });
 };
 
@@ -72,10 +74,10 @@ exports.getCar = function(id) {
 
 exports.getAllCars = function(opt_filter) {
     if (! opt_filter) {
-        return cars;
+        return Q.resolve(carList);
     }
 
-    return _.filter(cars, function(car) {
+    return Q.resolve(_.filter(carList, function(car) {
         var keep = true;
 
         _.keys(opt_filter, function(key) {
@@ -83,5 +85,5 @@ exports.getAllCars = function(opt_filter) {
         });
 
         return keep;
-    });
+    }));
 };

@@ -33,3 +33,21 @@ exports.process = (carArray) => {
 	//todo: call something like updateCars, but with _.map
 	return filtered;
 }
+
+exports.calculatePersistence = (processedCars, persistedCars) => {
+  let idsToClose = _.map(persistedCars, function(car) {
+    return car.carID;
+  });
+  let toUpdate = [];
+  let toCreate = [];
+
+  _.each(processedCars, function(car) {
+    
+  });
+
+  return {
+    idsToClose : idsToClose,
+    toUpdate   : toUpdate,
+    toCreate   : toCreate
+  }
+}

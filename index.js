@@ -1,13 +1,13 @@
 var express      = require('express');
-var http         = require('./data-providers/httpProvider.js');
+//var http         = require('./data-providers/httpProvider.js');
 var file         = require('./data-providers/fileProvider.js');
 var dataProvider = require('./data-providers/dataProvider.js')(file);
 //var dataProvider = require('./data-provider/dataProvider')(http);
 var carProcessor = require('./processor/carArrayProcessor.js');
-var mysql        = require('./persistence/mysqlPersistence.js');
+//var mysql        = require('./persistence/mysqlPersistence.js');
 var debug        = require('./persistence/debugPersistence.js');
-//var persistence  = require('./persistence/persistence.js')(debug);
-var persistence  = require('./persistence/persistence')(mysql);
+var persistence  = require('./persistence/persistence.js')(debug);
+//var persistence  = require('./persistence/persistence')(mysql);
 
 var app = express();
 
@@ -38,7 +38,8 @@ function getPersistedActiveCars(processedCars) {
     active : true
   }
 
-  persistence.getAllCars(filter).then(function(persistedCars) {
+  return persistence.getAllCars(filter).then(function(persistedCars) {
+
     return {
       processedCars : processedCars,
       persistedCars : persistedCars
@@ -49,7 +50,7 @@ function getPersistedActiveCars(processedCars) {
 function persistCars(cars) {
   let processedCars = cars.processedCars;
   let persistedCars = cars.persistedCars;
-  let processed     = carProcessor.claculatePersistence(processedCars, persistedCars);
+  let processed     = carProcessor.calculatePersistence(processedCars, persistedCars);
   let carsToClose   = processed.idsToClose;
   let carsToUpdate  = processed.toUpdate;
   let carsToCreate  = processed.toCreate;
