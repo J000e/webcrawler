@@ -1,6 +1,6 @@
 var exports = module.exports = {};
 var _       = require('lodash');
-var currencyProvider = require('../data-providers/currency-provider')
+var currencyProvider = require('../data-providers/currency-provider');
 
 var nonCarIds = [318, 488];
 
@@ -21,7 +21,7 @@ function updateCars(cars) {
       is_active     : true,
       image         : car.image,
       price_history : car.carID,
-      price  : car.AuctionInfo.currentPrice * currencyProvider.getExchange('AED', 'HUF');
+      price  : car.AuctionInfo.currentPrice * currencyProvider.getExchange('AED', 'HUF')
     };
 
     console.log(currentCar);
