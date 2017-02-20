@@ -11,6 +11,10 @@ exports.getAllCars = function() {
   return deferred.promise;
 };
 
-exports.getCar = function(id) {
-  return undefined;
+exports.getCarsDetails = function getCarsDetails(ids) {
+  var deferred = Q.defer();
+
+  deferred.resolve([]);
+
+  return deferred.promise;
 };

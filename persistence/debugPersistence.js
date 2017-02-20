@@ -62,10 +62,12 @@ exports.saveCar = function(car) {
   carList.push(car);
 };
 
-exports.saveCars = function(cars) {
+saveCars = function(cars) {
   _.each(cars, function(car) {
     carList.push(car);
   });
+
+  return cars.length;
 };
 
 exports.getCar = function(id) {
@@ -87,8 +89,17 @@ exports.getAllCars = function getAllCars(opt_filter) {
   }));
 };
 
-exports.updateCarPrices = function(prices) {
-  _.each(prices, function(price) {
-    //carList[price.id]
-  });
+function closeCars(cars) {
+  return cars.length;
+},
+
+exports.persist = function persist(carsToCreate, carsToUpdate, carsToClose) {
+  let report = {};
+
+  report.createdNumber = saveCars(carsToCreate);
+  report.updateNumber  = updateCars(carsToUpdate);
+  report.deleteNumber  = carsToClose.then( cars => closeCars);
+  //this.
+
+  return report;
 };

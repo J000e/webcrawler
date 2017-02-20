@@ -26,6 +26,10 @@ module.exports = function(provider) {
      */
     updateCarPrices : function(prices) {
       return provider.updateCarPrices(prices);
+    },
+
+    persist : function persist(carsToCreate, carsToUpdate, carsToClose) {
+      return provider.persist(carsToCreate, carsToUpdate, carsToClose);
     }
   };
 };

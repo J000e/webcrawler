@@ -1,10 +1,10 @@
 module.exports = (provider) => {
   return {
-    getAllCars : function() {
+    getAllCars : function getAllCars() {
       return provider.getAllCars();
     },
-    getCar : function(id) {
-      return provider.getCar(id);
+    getCarsDetails : function getCarsDetails(ids) {
+      return provider.getCarsDetails(ids);
     }
   };
 };

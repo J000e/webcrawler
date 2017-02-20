@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index",
+    "prestart" : "eslint **.*.js",
+    "start"    : "node index",
+    "startBundle": "node ./dist/bundle",
     "debug": "node-debug index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -63,10 +63,7 @@ function persistCars(cars) {
   let carsToUpdate  = processed.toUpdate;
   let carsToCreate  = processed.toCreate;
 
-  persistence.saveCars(carsToCreate);
-  persistence.updateCarPrices(carsToUpdate);
-
-  closeCars(carsToClose);
+  return persistence.persist(carsToCreate, carsToUpdate, dataProvider.getCarsDetails(carsToClose));
 };
 
 function closeCars(carIds) {
