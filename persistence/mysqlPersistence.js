@@ -4,7 +4,7 @@ var dbCred  = require('../resources/dbCredentials');
 var pool    = mysql.createPool(dbCred);
 
 
-function dbCall(query, callbackFn) {
+exports.dbCall = function dbCall(query, callbackFn) {
   pool.getConnection(function(err, connection) {
     if (err) {
       res.json({code : 100, status : 'Error in db connection'});
@@ -15,20 +15,19 @@ function dbCall(query, callbackFn) {
     console.log('connected as id ' + connection.threadId);
 
     connection.query(query, function(err, rows) {
-                      connection.release();
-                      callbackFn(rows);
-                    });
+      connection.release();
+      callbackFn(rows);
+    });
 
     connection.commit(function(err) {
       return connection.rollback(function() {
         throw err;
       });
-
     });
   });
-}
+};
 
-function handleDatabase(req, res) {
+exports.handleDatabase = function handleDatabase(req, res) {
   let query = 'select * ' +
               '  from Cars c, ' +
               '       Price_History p ' +
@@ -48,7 +47,7 @@ function handleDatabase(req, res) {
   })
 };
 
-function saveCar(car, date) {
+exports.saveCar = function saveCar(car, date) {
   let carsSql = 'insert into Cars(id, make, model, body, milage, year, is_active, image, price_history) ' +
       'select ?, ?, ?, ?, ?, ?, ?, ?, ? from dual ' + 
       'where not exists (select * from Cars where id = ?);'
@@ -56,4 +55,4 @@ function saveCar(car, date) {
   console.log('save in progress', car);
   dbCall(carsSql, function(rows) {console.log(rows)});
   console.log('car saved');
-}
+};

@@ -1,19 +1,19 @@
 var exports = module.exports = {};
 var http    = require('http');
-var q       = require('q');
+var Q       = require('q');
 var props   = require('../resources/properties');
 
 var urlPattern = /^(.*)(:(\w+))(.*)$/;
 
 exports.getAllCars = function() {
-    return sendGet(props.getAllCarUrl);
-}
+  return sendGet(props.getAllCarUrl);
+};
 
 exports.getCar = function(id) {
   return sendGet(props.getCarByIdUrl, {
-  	id : id
+    id : id
   });
-}
+};
 
 function sendGet(url, properties) {
   let deferred = Q.defer();
@@ -32,7 +32,7 @@ function sendGet(url, properties) {
     });
     res.on('end', () => {
       try {
-      	deferred.resolve(JSON.parse(rawData))
+        deferred.resolve(JSON.parse(rawData));
       } catch (e) {
         deferred.reject(e);
       }
@@ -44,7 +44,7 @@ function sendGet(url, properties) {
 
 function resolveUrl(url, properties) {
   if (! properties) {
-  	return url
+    return url;
   }
 
   let processed = urlPattern.exec(url);

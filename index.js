@@ -17,6 +17,7 @@ function refreshFromWeb(req, resp) {
     .then(processCars)
     .then(getPersistedActiveCars)
     .then(persistCars)
+    .then(showReport(req, resp))
     .catch(logError);
   /*
   dataProvider.getAllCars(function(carArray) {
@@ -28,6 +29,13 @@ function refreshFromWeb(req, resp) {
     resp.send('');
   });*/
 };
+
+function showReport(req, resp) {
+  return function(report) {
+    resp.send(`${report.createdNumber} number of car created, 
+      ${report.updatedNumber} number of car updated and deleted ${report.deletedNumber}.`);
+  }
+}
 
 function processCars(carArray) {
   return carProcessor.process(carArray);

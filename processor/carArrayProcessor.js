@@ -1,11 +1,12 @@
 var exports = module.exports = {};
 var _       = require('lodash');
+var currencyProvider = require('../data-providers/currency-provider')
 
 var nonCarIds = [318, 488];
 
 function justCars(car) {
   return nonCarIds.indexOf(car.makeID) > -1;
-};
+}
 
 function updateCars(cars) {
 
@@ -20,7 +21,7 @@ function updateCars(cars) {
       is_active     : true,
       image         : car.image,
       price_history : car.carID,
-      price  : car.AuctionInfo.currentPrice * 80
+      price  : car.AuctionInfo.currentPrice * currencyProvider.getExchange('AED', 'HUF');
     };
 
     console.log(currentCar);
@@ -29,10 +30,10 @@ function updateCars(cars) {
 }
 
 exports.process = (carArray) => {
-	let filtered = _.filter(carArray, justCars);
-	//todo: call something like updateCars, but with _.map
-	return filtered;
-}
+  let filtered = _.filter(carArray, justCars);
+  //todo: call something like updateCars, but with _.map
+  return filtered;
+};
 
 exports.calculatePersistence = (processedCars, persistedCars) => {
   let idsToClose = _.map(persistedCars, function(car) {
@@ -49,5 +50,5 @@ exports.calculatePersistence = (processedCars, persistedCars) => {
     idsToClose : idsToClose,
     toUpdate   : toUpdate,
     toCreate   : toCreate
-  }
-}
+  };
+};
