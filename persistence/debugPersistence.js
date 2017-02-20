@@ -91,7 +91,11 @@ exports.getAllCars = function getAllCars(opt_filter) {
 
 function closeCars(cars) {
   return cars.length;
-},
+}
+
+function updateCars(cars) {
+  return cars.length;
+}
 
 exports.persist = function persist(carsToCreate, carsToUpdate, carsToClose) {
   let report = {};

@@ -1,6 +1,9 @@
 var exports = module.exports = {};
 var http    = require('http');
-var Q       = require('q');
+
+import * as Q from "q";
+
+//var Q       = require('q');
 var props   = require('../resources/properties');
 
 var urlPattern = /^(.*)(:(\w+))(.*)$/;

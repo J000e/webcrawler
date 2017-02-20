@@ -13,9 +13,16 @@ module.exports = {
   target : 'node',
 
   module : {
-    rules : [
-      {test: /\.ts$/, loader: 'ts-loader'}/*,
+    rules : [{
+      enforce : 'pre',
+      test: /\.ts$/, 
+      loader: 'source-map-loader'
+    }/*,
       {test: /\.js$/, loader: ''}*/
     ]
+  },
+
+  resolve : {
+    extensions: ['.ts', '.js']
   }
 };

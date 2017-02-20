@@ -1,0 +1,44 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/home/jx01426/work/common/tools/node-v7.4.0-linux-x64/bin/node',
+1 verbose cli   '/home/jx01426/work/common/tools/node/npm',
+1 verbose cli   'run',
+1 verbose cli   'eslint',
+1 verbose cli   'data-providers/currency-provider.js',
+1 verbose cli   'data-providers/dataProvider.js',
+1 verbose cli   'data-providers/fileProvider.js',
+1 verbose cli   'data-providers/httpProvider.js',
+1 verbose cli   'dist/bundle.js',
+1 verbose cli   'node_modules/asn1.js',
+1 verbose cli   'node_modules/big.js',
+1 verbose cli   'node_modules/bignumber.js',
+1 verbose cli   'node_modules/bn.js',
+1 verbose cli   'node_modules/des.js',
+1 verbose cli   'node_modules/hash.js',
+1 verbose cli   'node_modules/ipaddr.js',
+1 verbose cli   'node_modules/sha.js',
+1 verbose cli   'persistence/debugPersistence.js',
+1 verbose cli   'persistence/mysqlPersistence.js',
+1 verbose cli   'persistence/persistence.js',
+1 verbose cli   'processor/carArrayProcessor.js' ]
+2 info using npm@4.0.5
+3 info using node@v7.4.0
+4 verbose stack Error: missing script: eslint
+4 verbose stack     at run (/home/jx01426/work/common/tools/node-v7.4.0-linux-x64/lib/node_modules/npm/lib/run-script.js:151:19)
+4 verbose stack     at /home/jx01426/work/common/tools/node-v7.4.0-linux-x64/lib/node_modules/npm/lib/run-script.js:61:5
+4 verbose stack     at /home/jx01426/work/common/tools/node-v7.4.0-linux-x64/lib/node_modules/npm/node_modules/read-package-json/read-json.js:356:5
+4 verbose stack     at checkBinReferences_ (/home/jx01426/work/common/tools/node-v7.4.0-linux-x64/lib/node_modules/npm/node_modules/read-package-json/read-json.js:320:45)
+4 verbose stack     at final (/home/jx01426/work/common/tools/node-v7.4.0-linux-x64/lib/node_modules/npm/node_modules/read-package-json/read-json.js:354:3)
+4 verbose stack     at then (/home/jx01426/work/common/tools/node-v7.4.0-linux-x64/lib/node_modules/npm/node_modules/read-package-json/read-json.js:124:5)
+4 verbose stack     at /home/jx01426/work/common/tools/node-v7.4.0-linux-x64/lib/node_modules/npm/node_modules/read-package-json/read-json.js:311:12
+4 verbose stack     at /home/jx01426/work/common/tools/node-v7.4.0-linux-x64/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:78:16
+4 verbose stack     at tryToString (fs.js:426:3)
+4 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:413:12)
+5 verbose cwd /home/jx01426/work/temp/ea/webcrawler
+6 error Linux 2.6.32-642.6.2.el6.x86_64
+7 error argv "/home/jx01426/work/common/tools/node-v7.4.0-linux-x64/bin/node" "/home/jx01426/work/common/tools/node/npm" "run" "eslint" "data-providers/currency-provider.js" "data-providers/dataProvider.js" "data-providers/fileProvider.js" "data-providers/httpProvider.js" "dist/bundle.js" "node_modules/asn1.js" "node_modules/big.js" "node_modules/bignumber.js" "node_modules/bn.js" "node_modules/des.js" "node_modules/hash.js" "node_modules/ipaddr.js" "node_modules/sha.js" "persistence/debugPersistence.js" "persistence/mysqlPersistence.js" "persistence/persistence.js" "processor/carArrayProcessor.js"
+8 error node v7.4.0
+9 error npm  v4.0.5
+10 error missing script: eslint
+11 error If you need help, you may report this error at:
+11 error     <https://github.com/npm/npm/issues>
+12 verbose exit [ 1, true ]
